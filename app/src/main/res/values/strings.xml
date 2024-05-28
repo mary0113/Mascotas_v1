@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Mascotas</string>
     <string name="title_activity_main2">MainActivity2</string>
+
+    <string name="Chesster">Chesster</string>
+    <string name="Duffy">Duffy</string>
+    <string name="Champiñon">Champiñon</string>
+    <string name="Cubrebocas">Cubrebocas</string>
+
 </resources>
