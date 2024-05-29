@@ -13,6 +13,11 @@
     <string name="vacuna2C">MOQUILLO:\n-Tipo: Inyección\n-Aplicada:No</string>
     <string name="vacuna3C">DESPARASITANTE:\n-Tipo: Pastilla\n-Aplicada:Sí</string>
     <string name="vacuna4C">RABIA:\n-Tipo: Inyección\n-Aplicada:Sí</string>
+    <string name="cita1C">28/05/2024\n-Cita para aplicación de la vacuna contra Moquillo</string>
+    <string name="cita2C">04/07/2024\n-Cita para revisión general</string>
+    <string name="cita3C">05/08/2024\n-Cita para revisión general</string>
+    <string name="cita4C">04/07/2024\n-Cita para desparasitar</string>
+
 
     <string name="nombre2">Duff</string>
     <string name="edad2">Edad: 6 años</string>
@@ -25,6 +30,10 @@
     <string name="vacuna2D">MOQUILLO:\n-Tipo: Inyección\n-Aplicada:Sí</string>
     <string name="vacuna3D">DESPARASITANTE:\n-Tipo: Pastilla\n-Aplicada:No</string>
     <string name="vacuna4D">RABIA:\n-Tipo: Inyección\n-Aplicada:Sí</string>
+    <string name="cita1D">08/05/2024\nCita para revisión general</string>
+    <string name="cita2D">10/05/2024\nCita para desparasitar</string>
+    <string name="cita3D">15/05/2024\nCita para revisión general</string>
+    <string name="cita4D">20/06/2024\nCita para aplicación de vacuna contra Parvovirus</string>
 
 
     <string name="nombre3">Champiñon</string>
@@ -38,6 +47,10 @@
     <string name="vacuna2CH">MOQUILLO:\n-Tipo: Inyección\n-Aplicada:Sí</string>
     <string name="vacuna3CH">DESPARASITANTE:\n-Tipo: Pastilla\n-Aplicada:No</string>
     <string name="vacuna4CH">RABIA:\n-Tipo: Inyección\n-Aplicada:No</string>
+    <string name="cita1CH">12/05/2024\nCita para revisión general</string>
+    <string name="cita2CH">25/08/2024\nCita desparasitar</string>
+    <string name="cita3CH">08/09/2024\nCita para aplicación de vacuna contra la Rabia</string>
+    <string name="cita4CH">20/11/2024\nCita para revisión general</string>
 
     <string name="nombre4">Mascarilla</string>
     <string name="edad4">Edad: 1 año</string>
@@ -50,5 +63,9 @@
     <string name="vacuna2M">RINOTRAQUEITIS:\n-Tipo: Inyección\n-Aplicada:No</string>
     <string name="vacuna3M">CALICIVIRUS:\n-Tipo: Inyección\n-Aplicada:SÍ</string>
     <string name="vacuna4M">CLAMIDIA:\n-Tipo: Inyección\n-Aplicada:No</string>
+    <string name="cita1M">03/06/2024\nCita para revisión aplicación de vacuna contra la Leucemia</string>
+    <string name="cita2M">23/08/2024\nCita para revisión general</string>
+    <string name="cita3M">13/09/2024\nCita para revisión general</string>
+    <string name="cita4M">29/10/2024\nCita para aplicación de vacuna contra Rinotraqueitis</string>
 
 </resources>

@@ -171,37 +171,37 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                                     ) {
                                         Text(
                                             text = stringResource(id = mascota.stringEdadId),
-                                            style = MaterialTheme.typography.bodyMedium,
+                                            style = MaterialTheme.typography.bodyLarge,
                                             color = Color.Black,
-                                            fontSize = 20.sp,
+                                            fontSize = 30.sp,
                                             textAlign = TextAlign.Center
                                         )
                                         Text(
                                             text = stringResource(id = mascota.stringEnfermedadId),
-                                            style = MaterialTheme.typography.bodyMedium,
+                                            style = MaterialTheme.typography.bodyLarge,
                                             color = Color.Black,
-                                            fontSize = 20.sp,
+                                            fontSize = 30.sp,
                                             textAlign = TextAlign.Center
                                         )
                                         Text(
                                             text = stringResource(id = mascota.stringAlturaId),
-                                            style = MaterialTheme.typography.bodyMedium,
+                                            style = MaterialTheme.typography.bodyLarge,
                                             color = Color.Black,
-                                            fontSize = 20.sp,
+                                            fontSize = 30.sp,
                                             textAlign = TextAlign.Center
                                         )
                                         Text(
                                             text = stringResource(id = mascota.stringRazaId),
-                                            style = MaterialTheme.typography.bodyMedium,
+                                            style = MaterialTheme.typography.bodyLarge,
                                             color = Color.Black,
-                                            fontSize = 20.sp,
+                                            fontSize = 30.sp,
                                             textAlign = TextAlign.Center
                                         )
                                         Text(
                                             text = stringResource(id = mascota.stringApodoId),
-                                            style = MaterialTheme.typography.bodyMedium,
+                                            style = MaterialTheme.typography.bodyLarge,
                                             color = Color.Black,
-                                            fontSize = 20.sp,
+                                            fontSize = 30.sp,
                                             textAlign = TextAlign.Center
                                         )
                                     }
@@ -212,8 +212,7 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
 
                             }
                             "Citas Médicas" -> {
-                                Text("Aquí va la información sobre las citas médicas")
-                                // Agrega aquí el contenido relacionado con las citas médicas
+                                MascotaCitas(citaIds = it.citaIds)
                             }
                         }
                     }
@@ -259,6 +258,47 @@ fun MascotaVacunas(vacunaIds: List<Int>) {
         )
         vacunaIds.forEach { vacunaId ->
             VacunaCard(vacunaId = vacunaId)
+        }
+    }
+}
+
+
+// Composable para mostrar una tarjeta de cita médica
+@Composable
+fun CitaCard(@StringRes citaId: Int) {
+    val cita = stringResource(id = citaId)
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = cita,
+                style = MaterialTheme.typography.bodyLarge,
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
+
+@Composable
+fun MascotaCitas(citaIds: List<Int>) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            text = "Citas Médicas",
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 35.sp,
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+        for (citaId in citaIds) {
+            CitaCard(citaId = citaId)
         }
     }
 }

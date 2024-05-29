@@ -10,7 +10,9 @@ data class Mascota(
     @StringRes val stringAlturaId:Int,   // Identificador de recurso de cadena para altura
     @StringRes val stringRazaId:Int, // Identificador de recurso de cadena para raza
     @StringRes val stringApodoId:Int, // Identificador de recurso de cadena para raza
-    @DrawableRes val imageResourceId :Int,
-    @StringRes val vacunaIds: List<Int> // Lista de identificadores de recursos de cadena para las vacunas
+    @DrawableRes val imageResourceId :Int, //Identificador de recurso de imagen
+    @StringRes val vacunaIds: List<Int>, // Lista de identificadores de recursos de cadena para las vacunas
+    @StringRes val citaIds: List<Int> // Lista de identificadores de recursos de cadena para las citas médicas
+
 )
 
