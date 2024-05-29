@@ -1,6 +1,8 @@
 package com.example.mascotas
 
+import android.graphics.drawable.Icon
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -11,17 +13,36 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.SemanticsProperties.ContentDescription
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,7 +53,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.mascotas.ui.theme.MascotasTheme
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +69,8 @@ class MainActivity : ComponentActivity() {
                         composable("principal_screen") {
                             PrincipalScreen(navController)
                         }
-                        composable("main_activity2") {
-                            MainActivity2Screen(navController)
+                        composable("home") {
+                            HomeScreen(navController)
                         }
                         composable(
                             "detail_screen/{mascotaId}",
@@ -75,7 +95,7 @@ fun PrincipalScreen(navController: NavController) {
         title = "PET-HEALTH",
         phrase = "La Salud De Tus Mascotas",
         onButtonClick = {
-            navController.navigate("main_activity2")
+            navController.navigate("home")
         }
     )
 }
@@ -89,35 +109,35 @@ fun PrincipalText(title: String, phrase: String, modifier: Modifier = Modifier, 
         modifier = modifier
             .padding(8.dp)
     ){
-            Spacer(modifier = Modifier.weight(3f))
-            Text(
-                text = title,
-                style = MaterialTheme.typography.headlineLarge, // Usa la tipografía personalizada
-                fontSize = 30.sp,
-                lineHeight = 116.sp,
-                modifier = Modifier
-                    .padding(10.dp)
-                    .align(alignment = Alignment.CenterHorizontally)
-            )
-            Button(
-                onClick = onButtonClick,
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF654321)), // Color específico
-                 modifier = Modifier
-                    .padding(10.dp)
-                    .align(alignment = Alignment.CenterHorizontally)
-            ) {
-                 Text(text = "Comenzar", color = Color.White)
-              }
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                text = phrase,
-                style = MaterialTheme.typography.bodySmall, // Usa la tipografía personalizada
-                fontSize = 25.sp,
-                modifier = Modifier
-                    .padding(10.dp)
-                    .align(alignment = Alignment.CenterHorizontally)
-            )
+        Spacer(modifier = Modifier.weight(3f))
+        Text(
+            text = title,
+            style = MaterialTheme.typography.headlineLarge, // Usa la tipografía personalizada
+            fontSize = 30.sp,
+            lineHeight = 116.sp,
+            modifier = Modifier
+                .padding(10.dp)
+                .align(alignment = Alignment.CenterHorizontally)
+        )
+        Button(
+            onClick = onButtonClick,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF654321)), // Color específico
+            modifier = Modifier
+                .padding(10.dp)
+                .align(alignment = Alignment.CenterHorizontally)
+        ) {
+            Text(text = "Comenzar", color = Color.White)
         }
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            text = phrase,
+            style = MaterialTheme.typography.bodySmall, // Usa la tipografía personalizada
+            fontSize = 25.sp,
+            modifier = Modifier
+                .padding(10.dp)
+                .align(alignment = Alignment.CenterHorizontally)
+        )
+    }
 }
 
 @Composable
@@ -149,9 +169,7 @@ fun PrincipalCardPreview() {
     MascotasTheme {
         PrincipalImage(title = "PET-HEALTH",
             phrase = "La Salud De Tus Mascotas",
-        onButtonClick = {}
+            onButtonClick = {}
         )
     }
 }
-
-

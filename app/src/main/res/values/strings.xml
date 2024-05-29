@@ -2,9 +2,37 @@
     <string name="app_name">Mascotas</string>
     <string name="title_activity_main2">MainActivity2</string>
 
-    <string name="Chesster">Chesster</string>
-    <string name="Duffy">Duffy</string>
-    <string name="Champiñon">Champiñon</string>
-    <string name="Cubrebocas">Cubrebocas</string>
+    <string name="nombre1">Chesster</string>
+    <string name="edad1">Edad: 2 años</string>
+    <string name="enfermedad1">Enfermedad: Moquillo</string>
+    <string name="peso1">Peso: 12kg</string>
+    <string name="altura1">Altura: 40 cm</string>
+    <string name="raza1">Raza: Goldendoddle-Poodle</string>
+    <string name="apodo1">Apodo: Burrito</string>
+
+    <string name="nombre2">Duff</string>
+    <string name="edad2">Edad: 6 años</string>
+    <string name="enfermedad2">Enfermedad: Ninguna</string>
+    <string name="peso2">Peso: 8kg</string>
+    <string name="altura2">Altura: 30 cm</string>
+    <string name="raza2">Raza: Shih tzu-Poodle</string>
+    <string name="apodo2">Apodo: Duffy</string>
+
+
+    <string name="nombre3">Champiñon</string>
+    <string name="edad3">Edad: 3 años</string>
+    <string name="enfermedad3">Enfermedad: Ninguna</string>
+    <string name="peso3">Peso: 10kg</string>
+    <string name="altura3">Altura: 35 cm</string>
+    <string name="raza3">Raza: Chihuahua</string>
+    <string name="apodo3">Apodo: Champi</string>
+
+    <string name="nombre4">Mascarilla</string>
+    <string name="edad4">Edad: 1 año</string>
+    <string name="enfermedad4">Enfermedad: Sarna</string>
+    <string name="peso4">Peso: 6kg</string>
+    <string name="altura4">Altura: 20 cm</string>
+    <string name="raza4">Raza: Burmés</string>
+    <string name="apodo4">Apodo: Cubrebocas</string>
 
 </resources>
