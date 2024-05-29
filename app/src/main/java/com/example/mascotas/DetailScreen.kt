@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -141,6 +142,8 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                                 Text(
                                     text = stringResource(id = it.stringResourceId),
                                     style = MaterialTheme.typography.headlineLarge,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    fontSize = 35.sp,
                                     modifier = Modifier.padding(bottom = 8.dp)
                                 )
                                 Image(
@@ -205,8 +208,8 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                                 }
                             }
                             "Vacunas" -> {
-                                Text("Aquí va la información sobre las vacunas")
-                                // Agrega aquí el contenido relacionado con las vacunas
+                                MascotaVacunas(vacunaIds = it.vacunaIds)
+
                             }
                             "Citas Médicas" -> {
                                 Text("Aquí va la información sobre las citas médicas")
@@ -219,6 +222,47 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
         }
     )
 }
+
+
+// Composable para mostrar una tarjeta de vacuna
+@Composable
+fun VacunaCard(@StringRes vacunaId: Int) {
+    val vacuna = stringResource(id = vacunaId)
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = vacuna,
+                style = MaterialTheme.typography.bodyLarge,
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Bold)
+        }
+    }
+}
+
+//Composable para mostrar todas las vacunas de una mascota
+@Composable
+fun MascotaVacunas(vacunaIds: List<Int>) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            text = "VACUNAS:",
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+        vacunaIds.forEach { vacunaId ->
+            VacunaCard(vacunaId = vacunaId)
+        }
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable

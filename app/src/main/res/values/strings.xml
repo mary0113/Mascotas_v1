@@ -9,6 +9,10 @@
     <string name="altura1">Altura: 40 cm</string>
     <string name="raza1">Raza: Goldendoddle-Poodle</string>
     <string name="apodo1">Apodo: Burrito</string>
+    <string name="vacuna1C">PARVOVIRUS:\n-Tipo: Inyección\n-Aplicada:Sí</string>
+    <string name="vacuna2C">MOQUILLO:\n-Tipo: Inyección\n-Aplicada:No</string>
+    <string name="vacuna3C">DESPARASITANTE:\n-Tipo: Pastilla\n-Aplicada:Sí</string>
+    <string name="vacuna4C">RABIA:\n-Tipo: Inyección\n-Aplicada:Sí</string>
 
     <string name="nombre2">Duff</string>
     <string name="edad2">Edad: 6 años</string>
@@ -17,6 +21,10 @@
     <string name="altura2">Altura: 30 cm</string>
     <string name="raza2">Raza: Shih tzu-Poodle</string>
     <string name="apodo2">Apodo: Duffy</string>
+    <string name="vacuna1D">PARVOVIRUS:\n-Tipo: Inyección\n-Aplicada:No</string>
+    <string name="vacuna2D">MOQUILLO:\n-Tipo: Inyección\n-Aplicada:Sí</string>
+    <string name="vacuna3D">DESPARASITANTE:\n-Tipo: Pastilla\n-Aplicada:No</string>
+    <string name="vacuna4D">RABIA:\n-Tipo: Inyección\n-Aplicada:Sí</string>
 
 
     <string name="nombre3">Champiñon</string>
@@ -26,6 +34,10 @@
     <string name="altura3">Altura: 35 cm</string>
     <string name="raza3">Raza: Chihuahua</string>
     <string name="apodo3">Apodo: Champi</string>
+    <string name="vacuna1CH">PARVOVIRUS:\n-Tipo: Inyección\n-Aplicada:Sí</string>
+    <string name="vacuna2CH">MOQUILLO:\n-Tipo: Inyección\n-Aplicada:Sí</string>
+    <string name="vacuna3CH">DESPARASITANTE:\n-Tipo: Pastilla\n-Aplicada:No</string>
+    <string name="vacuna4CH">RABIA:\n-Tipo: Inyección\n-Aplicada:No</string>
 
     <string name="nombre4">Mascarilla</string>
     <string name="edad4">Edad: 1 año</string>
@@ -34,5 +46,9 @@
     <string name="altura4">Altura: 20 cm</string>
     <string name="raza4">Raza: Burmés</string>
     <string name="apodo4">Apodo: Cubrebocas</string>
+    <string name="vacuna1M">LEUCEMIA:\n-Tipo: Inyección\n-Aplicada:No</string>
+    <string name="vacuna2M">RINOTRAQUEITIS:\n-Tipo: Inyección\n-Aplicada:No</string>
+    <string name="vacuna3M">CALICIVIRUS:\n-Tipo: Inyección\n-Aplicada:SÍ</string>
+    <string name="vacuna4M">CLAMIDIA:\n-Tipo: Inyección\n-Aplicada:No</string>
 
 </resources>

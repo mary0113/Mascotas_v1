@@ -75,7 +75,7 @@ fun HomeScreen(navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xFFb4764f)) // Fondo de color específico
+                    .background(color = MaterialTheme.colorScheme.onSecondaryContainer)// Fondo de color específico
                     .padding(innerPadding)
             ) {
                 Column(
@@ -86,7 +86,7 @@ fun HomeScreen(navController: NavController) {
                 ) {
                     Text(
                         text = "PET-HEALTH",
-                        color = Color(0xFF2a1d10),
+                        color = MaterialTheme.colorScheme.primary,
                         fontSize = 35.sp,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
@@ -101,7 +101,7 @@ fun HomeScreen(navController: NavController) {
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = "TUS MASCOTAS",
-                        color = Color(0xFFfbedba),
+                        color = MaterialTheme.colorScheme.tertiary,
                         fontSize = 25.sp,
                         textAlign = TextAlign.Start,
                         style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
@@ -143,7 +143,8 @@ fun MascotaCard(mascota: Mascota, onClick: () -> Unit, modifier: Modifier = Modi
             Text(
                 text = nombre,
                 modifier = Modifier.padding(16.dp),
-                style = MaterialTheme.typography.headlineSmall
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.secondary
             )
         }
     }

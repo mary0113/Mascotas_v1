@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mascotas.R
 
 
+
 val CustomFont = FontFamily(
     Font(R.font.custom_font_regular, FontWeight.Normal),
     Font(R.font.stocky, FontWeight.Normal)
