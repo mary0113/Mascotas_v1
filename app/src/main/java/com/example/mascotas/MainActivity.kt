@@ -81,6 +81,13 @@ class MainActivity : ComponentActivity() {
                                 DetailScreen(navController = navController, mascotaId = id)
                             }
                         }
+                        composable("vaccines_screen") {
+                            VaccinesScreen(navController)
+                        }
+                        composable("medical_screen") {
+                            MedicalScreen(navController)
+                        }
+
                     }
                 }
             }

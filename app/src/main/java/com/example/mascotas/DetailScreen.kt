@@ -62,7 +62,8 @@ class DetailScreen : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color(0xFFb4764f)
                 ) {
-                    DetailScreen()
+                    val navController = rememberNavController()
+                    DetailScreen(navController, 1) // Asumiendo 1 como ejemplo de mascotaId
                 }
             }
         }
@@ -75,6 +76,8 @@ class DetailScreen : ComponentActivity() {
 @Composable
 fun DetailScreen(navController: NavController, mascotaId: Int) {
     val mascota = Datasource().loadMascotas().find { it.stringResourceId == mascotaId }
+    var selectedButton by remember { mutableStateOf("Información") }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -103,8 +106,6 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                         .padding(16.dp)
                 ) {
                     Column {
-                        var selectedButton by remember { mutableStateOf("Información") }
-
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceEvenly
@@ -135,69 +136,81 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                             }
                         }
 
-                        Text(
-                            text = stringResource(id = it.stringResourceId),
-                            style = MaterialTheme.typography.headlineLarge,
-                            modifier = Modifier.padding(bottom = 8.dp)
-                        )
-                        Image(
-                            painter = painterResource(it.imageResourceId),
-                            contentDescription = stringResource(id = it.stringResourceId),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(194.dp),
-                            contentScale = ContentScale.Crop
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 16.dp),
-                            elevation = CardDefaults.cardElevation(4.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFFd0ab7a)) // Color de fondo del Card
-                        ) {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
+                        when (selectedButton) {
+                            "Información" -> {
                                 Text(
-                                    text = stringResource(id = mascota.stringEdadId),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = Color.Black,
-                                    fontSize = 20.sp,
-                                    textAlign = TextAlign.Center
+                                    text = stringResource(id = it.stringResourceId),
+                                    style = MaterialTheme.typography.headlineLarge,
+                                    modifier = Modifier.padding(bottom = 8.dp)
                                 )
-                                Text(
-                                    text = stringResource(id = mascota.stringEnfermedadId),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = Color.Black,
-                                    fontSize = 20.sp,
-                                    textAlign = TextAlign.Center
+                                Image(
+                                    painter = painterResource(it.imageResourceId),
+                                    contentDescription = stringResource(id = it.stringResourceId),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(194.dp),
+                                    contentScale = ContentScale.Crop
                                 )
-                                Text(
-                                    text = stringResource(id = mascota.stringAlturaId),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = Color.Black,
-                                    fontSize = 20.sp,
-                                    textAlign = TextAlign.Center
-                                )
-                                Text(
-                                    text = stringResource(id = mascota.stringRazaId),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = Color.Black,
-                                    fontSize = 20.sp,
-                                    textAlign = TextAlign.Center
-                                )
-                                Text(
-                                    text = stringResource(id = mascota.stringApodoId),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = Color.Black,
-                                    fontSize = 20.sp,
-                                    textAlign = TextAlign.Center
-                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Card(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 16.dp),
+                                    elevation = CardDefaults.cardElevation(4.dp),
+                                    colors = CardDefaults.cardColors(containerColor = Color(0xFFd0ab7a)) // Color de fondo del Card
+                                ) {
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(16.dp),
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        Text(
+                                            text = stringResource(id = mascota.stringEdadId),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = Color.Black,
+                                            fontSize = 20.sp,
+                                            textAlign = TextAlign.Center
+                                        )
+                                        Text(
+                                            text = stringResource(id = mascota.stringEnfermedadId),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = Color.Black,
+                                            fontSize = 20.sp,
+                                            textAlign = TextAlign.Center
+                                        )
+                                        Text(
+                                            text = stringResource(id = mascota.stringAlturaId),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = Color.Black,
+                                            fontSize = 20.sp,
+                                            textAlign = TextAlign.Center
+                                        )
+                                        Text(
+                                            text = stringResource(id = mascota.stringRazaId),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = Color.Black,
+                                            fontSize = 20.sp,
+                                            textAlign = TextAlign.Center
+                                        )
+                                        Text(
+                                            text = stringResource(id = mascota.stringApodoId),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = Color.Black,
+                                            fontSize = 20.sp,
+                                            textAlign = TextAlign.Center
+                                        )
+                                    }
+                                }
+                            }
+                            "Vacunas" -> {
+                                Text("Aquí va la información sobre las vacunas")
+                                // Agrega aquí el contenido relacionado con las vacunas
+                            }
+                            "Citas Médicas" -> {
+                                Text("Aquí va la información sobre las citas médicas")
+                                // Agrega aquí el contenido relacionado con las citas médicas
                             }
                         }
                     }
@@ -207,11 +220,11 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
     )
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview() {
     MascotasTheme {
-        DetailScreen()
+        val navController = rememberNavController()
+        DetailScreen(navController = navController, mascotaId = 1) // Asumiendo 1 como ejemplo de mascotaId
     }
 }
