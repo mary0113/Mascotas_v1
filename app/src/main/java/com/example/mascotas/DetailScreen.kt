@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -249,7 +251,8 @@ fun VacunaCard(@StringRes vacunaId: Int) {
     }
 }
 
-//Composable para mostrar todas las vacunas de una mascota
+
+// Composable para mostrar todas las vacunas de una mascota en una lista desplazable
 @Composable
 fun MascotaVacunas(vacunaIds: List<Int>) {
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -259,11 +262,15 @@ fun MascotaVacunas(vacunaIds: List<Int>) {
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(bottom = 8.dp)
         )
-        vacunaIds.forEach { vacunaId ->
-            VacunaCard(vacunaId = vacunaId)
+        LazyColumn {
+            items(vacunaIds) { vacunaId ->
+                VacunaCard(vacunaId = vacunaId)
+            }
         }
     }
 }
+
+
 
 
 // Composable para mostrar una tarjeta de cita médica
@@ -290,6 +297,7 @@ fun CitaCard(@StringRes citaId: Int) {
     }
 }
 
+// Composable para mostrar todas las citas médicas de una mascota en una lista desplazable
 @Composable
 fun MascotaCitas(citaIds: List<Int>) {
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -300,8 +308,10 @@ fun MascotaCitas(citaIds: List<Int>) {
             fontSize = 35.sp,
             modifier = Modifier.padding(vertical = 8.dp)
         )
-        for (citaId in citaIds) {
-            CitaCard(citaId = citaId)
+        LazyColumn {
+            items(citaIds) { citaId ->
+                CitaCard(citaId = citaId)
+            }
         }
     }
 }
