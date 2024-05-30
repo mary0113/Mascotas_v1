@@ -3,6 +3,7 @@ package com.example.mascotas.model
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
+//DataClass que representa una mascota
 data class Mascota(
     @StringRes val stringResourceId:Int, // Identificador de recurso de cadena para el nombre
     @StringRes val stringEdadId:Int, // Identificador de recurso de cadena para la edad

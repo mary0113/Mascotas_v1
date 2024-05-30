@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import com.example.mascotas.R
 import com.example.mascotas.model.Mascota
 
+//Clase que proporciona los datos de las mascotas.
 class Datasource (){
+   // Carga la lista de mascotas con sus respectivos datos.
     @SuppressLint("ResourceType")
     fun loadMascotas(): List<Mascota>{
         return listOf<Mascota>(

@@ -55,6 +55,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mascotas.data.Datasource
 import com.example.mascotas.ui.theme.MascotasTheme
 
+//Clase que muestra los detalles de la informacion sobre una mascotas
 class DetailScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +75,7 @@ class DetailScreen : ComponentActivity() {
 }
 
 
-
+//Función composable que muestra información detallada de una mascota
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(navController: NavController, mascotaId: Int) {
