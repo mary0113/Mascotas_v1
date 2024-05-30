@@ -97,6 +97,9 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                 )
             )
         },
+        bottomBar = {
+            MyBottomAppBar(navController = navController)
+        },
         content = { innerPadding ->
             mascota?.let {
                 Box(
@@ -302,6 +305,7 @@ fun MascotaCitas(citaIds: List<Int>) {
         }
     }
 }
+
 
 
 @Preview(showBackground = true)
