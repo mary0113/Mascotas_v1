@@ -1,8 +1,6 @@
 package com.example.mascotas
 
-import android.graphics.drawable.Icon
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,34 +13,28 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.SemanticsProperties.ContentDescription
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -81,8 +73,14 @@ class MainActivity : ComponentActivity() {
                                 DetailScreen(navController = navController, mascotaId = id)
                             }
                         }
-                        composable("vaccines_screen") {
-                            VaccinesScreen(navController)
+                        composable("search"){
+                            SearchScreen(navController)
+                        }
+                        composable("favorites"){
+                            FavoritesScreen(navController)
+                        }
+                        composable("info") {
+                            InfoScreen(navController)
                         }
 
                     }
@@ -165,6 +163,80 @@ fun PrincipalImage(title: String, phrase: String, modifier: Modifier = Modifier,
     }
 }
 
+@Composable
+fun MyBottomAppBar(navController: NavController) {
+    val context = LocalContext.current.applicationContext
+    val selected = remember { mutableStateOf(Icons.Default.Home) }
+
+    BottomAppBar(
+        containerColor = Color.LightGray
+    ) {
+        IconButton(
+            onClick = {
+                selected.value = Icons.Default.Home
+                navController.navigate(Screens.Home.screen) {
+                    popUpTo(Screens.Home.screen) { inclusive = true }
+                }
+            },
+            modifier = Modifier.weight(1f)
+        ) {
+            Icon(
+                Icons.Default.Home,
+                contentDescription = null,
+                modifier = Modifier.size(26.dp),
+                tint = if (selected.value == Icons.Default.Home) Color.White else Color.DarkGray
+            )
+        }
+        IconButton(
+            onClick = {
+                selected.value = Icons.Default.Search
+                navController.navigate(Screens.Search.screen) {
+                    popUpTo(Screens.Home.screen) { inclusive = false }
+                }
+            },
+            modifier = Modifier.weight(1f)
+        ) {
+            Icon(
+                Icons.Default.Search,
+                contentDescription = null,
+                modifier = Modifier.size(26.dp),
+                tint = if (selected.value == Icons.Default.Search) Color.White else Color.DarkGray
+            )
+        }
+        IconButton(
+            onClick = {
+                selected.value = Icons.Default.Favorite
+                navController.navigate(Screens.Favorites.screen) {
+                    popUpTo(Screens.Home.screen) { inclusive = false }
+                }
+            },
+            modifier = Modifier.weight(1f)
+        ) {
+            Icon(
+                Icons.Default.Favorite,
+                contentDescription = null,
+                modifier = Modifier.size(26.dp),
+                tint = if (selected.value == Icons.Default.Favorite) Color.White else Color.DarkGray
+            )
+        }
+        IconButton(
+            onClick = {
+                selected.value = Icons.Default.Info
+                navController.navigate(Screens.Info.screen) {
+                    popUpTo(Screens.Home.screen) { inclusive = false }
+                }
+            },
+            modifier = Modifier.weight(1f)
+        ) {
+            Icon(
+                Icons.Default.Info,
+                contentDescription = null,
+                modifier = Modifier.size(26.dp),
+                tint = if (selected.value == Icons.Default.Info) Color.White else Color.DarkGray
+            )
+        }
+    }
+}
 
 
 @Preview(showBackground = true)

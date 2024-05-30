@@ -57,6 +57,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.compose.material3:material3:1.2.1")
 
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
+    implementation ("androidx.compose.material3:material3:1.2.1")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

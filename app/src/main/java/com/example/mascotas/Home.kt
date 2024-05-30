@@ -71,6 +71,9 @@ fun HomeScreen(navController: NavController) {
                 )
             )
         },
+        bottomBar = {
+            MyBottomAppBar(navController)
+        },
         content = { innerPadding ->
             Box(
                 modifier = Modifier
