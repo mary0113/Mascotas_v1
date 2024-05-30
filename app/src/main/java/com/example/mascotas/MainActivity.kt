@@ -85,8 +85,18 @@ class MainActivity : ComponentActivity() {
                                 DetailScreen(navController = navController, mascotaId = id)
                             }
                         }
-                        composable("search"){
-                            SearchScreen(navController)
+                        composable("search") {
+                            SearchScreen(
+                                navController = navController,
+                                favoriteMascotas = favoriteMascotas,
+                                onFavoriteChange = { mascotaId ->
+                                    if (favoriteMascotas.value.contains(mascotaId)) {
+                                        favoriteMascotas.value = favoriteMascotas.value - mascotaId
+                                    } else {
+                                        favoriteMascotas.value = favoriteMascotas.value + mascotaId
+                                    }
+                                }
+                            )
                         }
                         composable("favorites"){
                             FavoritesScreen(navController = navController, favoriteMascotas = favoriteMascotas.value)

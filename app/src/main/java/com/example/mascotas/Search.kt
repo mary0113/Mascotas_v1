@@ -5,6 +5,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,10 +15,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,6 +34,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,12 +44,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mascotas.data.Datasource
 import com.example.mascotas.model.Mascota
+import com.example.mascotas.ui.theme.CustomTypography
 
 
 //Se cargan los datos de las mascotas y se guardan
@@ -56,7 +65,7 @@ fun getString(context: Context, @StringRes id: Int): String {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchScreen(navController: NavController) {
+fun SearchScreen(navController: NavController, favoriteMascotas: MutableState<List<Int>>, onFavoriteChange: (Int) -> Unit) {
     val ctx = LocalContext.current
     val mascotas = remember { Datasource().loadMascotas() }
     var active by remember { mutableStateOf(false) } // Representa el estado de la searchBar
@@ -90,54 +99,72 @@ fun SearchScreen(navController: NavController) {
             MyBottomAppBar(navController)
         },
         content = { innerPadding ->
-            Scaffold(
-                modifier = Modifier.padding(innerPadding),
-                content = {
-                    Column {
-                        SearchBar(
-                            query = query.text,
-                            onQueryChange = { query = TextFieldValue(it) },
-                            onSearch = {
-                                active = false // Cambia de activo a no activo
-                            },
-                            active = active,
-                            onActiveChange = { active = it }
-                        ) {
-                            // Contenido del SearchBar si es necesario
-                        }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = MaterialTheme.colorScheme.onSecondaryContainer) // Fondo de color específico
+                    .padding(innerPadding)
+            ) {
+                //Para mostrar la lista desplazable tal cual como en la de Home se reutiliza código
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(20.dp)
+                ) {
+                    Text(
+                        text = "PET-HEALTH",
+                        color = MaterialTheme.colorScheme.primary,
+                        fontSize = 35.sp,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
+                    )
+                    Divider(
+                        color = Color(0xFF5a4928),
+                        thickness = 2.dp,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp)
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    //Se cambia a Buscar mascotas
+                    Text(
+                        text = "BUSCAR MASCOTAS",
+                        color = MaterialTheme.colorScheme.tertiary,
+                        fontSize = 25.sp,
+                        textAlign = TextAlign.Start,
+                        style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                        // Lista de resultados de búsqueda
-                        LazyColumn(modifier = Modifier.fillMaxSize()) {
-                            items(filteredMascotas) { mascota ->
-                                MascotaItem(mascota = mascota)
-                            }
+                    SearchBar(
+                        query = query.text,
+                        onQueryChange = { query = TextFieldValue(it) },
+                        onSearch = {
+                            active = false // Cambia de activo a no activo
+                        },
+                        active = active,
+                        onActiveChange = { active = it }
+                    ) {
+                        // Contenido del SearchBar si es necesario
+                    }
+
+                    // Lista de resultados de búsqueda reutilizando el mascotaCard, para que muestre la lista e incluso lo de añadir a favoritos
+                    //También navega a la página de detalles en caso de darle clic a la card
+                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                        items(filteredMascotas) { mascota ->
+                            MascotaCard(
+                                mascota = mascota,
+                                onClick = { navController.navigate("detail_screen/${mascota.stringResourceId}") },
+                                onFavoriteClick = { onFavoriteChange(mascota.stringResourceId) },
+                                isFavorite = favoriteMascotas.value.contains(mascota.stringResourceId),
+                                modifier = Modifier.padding(8.dp)
+                            )
                         }
                     }
                 }
-            )
+            }
         }
     )
 }
 
-
-@Composable
-fun MascotaItem(mascota: Mascota) {
-    val context = LocalContext.current
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-    ) {
-        Image(
-            painter = painterResource(mascota.imageResourceId),
-            contentDescription = null,
-            modifier = Modifier.size(64.dp)
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Column {
-            Text(text = getString(context, mascota.stringResourceId))
-            Text(text = getString(context, mascota.stringEdadId))
-            Text(text = getString(context, mascota.stringRazaId))
-        }
-    }
-}
