@@ -64,10 +64,10 @@ class DetailScreen : ComponentActivity() {
             MascotasTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color(0xFFb4764f)
+                    color = Color(0xFFb4764f) // Color de fondo de la pantalla
                 ) {
-                    val navController = rememberNavController()
-                    DetailScreen(navController, 1) // Asumiendo 1 como ejemplo de mascotaId
+                    val navController = rememberNavController() // Controlador de navegación
+                    DetailScreen(navController, 1) // Llama a la función composable con un ejemplo de mascotaId
                 }
             }
         }
@@ -79,15 +79,15 @@ class DetailScreen : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(navController: NavController, mascotaId: Int) {
-    val mascota = Datasource().loadMascotas().find { it.stringResourceId == mascotaId }
-    var selectedButton by remember { mutableStateOf("Información") }
+    val mascota = Datasource().loadMascotas().find { it.stringResourceId == mascotaId }  // Encuentra la mascota correspondiente al ID proporcionado
+    var selectedButton by remember { mutableStateOf("Información") } // Estado para el botón seleccionado
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Atrás     PET-HEALTH", color = Color.White) },
+                title = { Text(text = "Atrás     PET-HEALTH", color = Color.White) }, // Título de la barra superior
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.popBackStack() }) { // Botón de navegación para volver atrás
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Back",
@@ -96,23 +96,25 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF2a1d10)
+                    containerColor = Color(0xFF2a1d10) // Color del fondo de la barra superior
                 )
             )
         },
         bottomBar = {
-            MyBottomAppBar(navController = navController)
+            MyBottomAppBar(navController = navController) // Barra inferior
         },
         content = { innerPadding ->
             mascota?.let {
+                // Caja de contenedor para la información detallada
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(innerPadding)
-                        .background(Color(0xFF795548)) // Establece el color de fondo
+                        .background(Color(0xFF795548)) // Color de fondo
                         .padding(16.dp)
                 ) {
                     Column {
+                        // Fila de botones para cambiar entre diferentes secciones de información
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceEvenly
@@ -142,11 +144,11 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                                 Text(text = "Citas Médicas", color = if (selectedButton == "Citas Médicas") Color.White else Color.Black)
                             }
                         }
-
+                        // Muestra diferentes secciones según el botón seleccionado
                         when (selectedButton) {
                             "Información" -> {
                                 Text(
-                                    text = stringResource(id = it.stringResourceId),
+                                    text = stringResource(id = it.stringResourceId),  // Nombre de la mascota
                                     style = MaterialTheme.typography.headlineLarge,
                                     color = MaterialTheme.colorScheme.primary,
                                     fontSize = 35.sp,
@@ -154,7 +156,7 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                                 )
                                 Image(
                                     painter = painterResource(it.imageResourceId),
-                                    contentDescription = stringResource(id = it.stringResourceId),
+                                    contentDescription = stringResource(id = it.stringResourceId), // Imagen de la mascota
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(194.dp),
@@ -168,6 +170,7 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                                     elevation = CardDefaults.cardElevation(4.dp),
                                     colors = CardDefaults.cardColors(containerColor = Color(0xFFd0ab7a)) // Color de fondo del Card
                                 ) {
+                                    // Información detallada de la mascota
                                     Column(
                                         modifier = Modifier
                                             .fillMaxWidth()
@@ -213,11 +216,11 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                                     }
                                 }
                             }
-                            "Vacunas" -> {
+                            "Vacunas" -> {  // Muestra las vacunas de la mascota
                                 MascotaVacunas(vacunaIds = it.vacunaIds)
 
                             }
-                            "Citas Médicas" -> {
+                            "Citas Médicas" -> {  // Muestra las citas médicas de la mascota
                                 MascotaCitas(citaIds = it.citaIds)
                             }
                         }

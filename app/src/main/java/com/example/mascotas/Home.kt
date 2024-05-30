@@ -50,12 +50,14 @@ import androidx.navigation.NavController
 
 import com.example.mascotas.model.Mascota
 
+//Composable par manejar la pantalla principal
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController, favoriteMascotas: MutableState<List<Int>>, onFavoriteChange: (Int) -> Unit) {
-
+    // Diseño de la pantalla usando Scaffold
     Scaffold(
         topBar = {
+            // Barra superior con el botón de navegación
             TopAppBar(
                 title = { Text(text = "Atrás", color = Color.White) },
                 navigationIcon = {
@@ -68,12 +70,12 @@ fun HomeScreen(navController: NavController, favoriteMascotas: MutableState<List
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF352514)
+                    containerColor = Color(0xFF352514) // Color de fondo de la barra superior
                 )
             )
         },
         bottomBar = {
-            MyBottomAppBar(navController)
+            MyBottomAppBar(navController) // Barra inferior
         },
         content = { innerPadding ->
             Box(
@@ -89,23 +91,23 @@ fun HomeScreen(navController: NavController, favoriteMascotas: MutableState<List
                         .padding(20.dp)
                 ) {
                     Text(
-                        text = "PET-HEALTH",
-                        color = MaterialTheme.colorScheme.primary,
+                        text = "PET-HEALTH", // Título de la aplicación
+                        color = MaterialTheme.colorScheme.primary,  // Color del texto
                         fontSize = 35.sp,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
                     )
                     Divider(
                         color = Color(0xFF5a4928),
-                        thickness = 2.dp,
+                        thickness = 2.dp, // Grosor del separador
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 8.dp)
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "TUS MASCOTAS",
-                        color = MaterialTheme.colorScheme.tertiary,
+                        text = "TUS MASCOTAS", // Título de la sección de mascotas
+                        color = MaterialTheme.colorScheme.tertiary, // Color del texto
                         fontSize = 25.sp,
                         textAlign = TextAlign.Start,
                         style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
@@ -114,14 +116,14 @@ fun HomeScreen(navController: NavController, favoriteMascotas: MutableState<List
 
                     // Aquí se incluye la lista de mascotas
                     MascotaList(
-                        mascotaList = Datasource().loadMascotas(),
+                        mascotaList = Datasource().loadMascotas(), // Carga de mascotas
                         onItemClick = { mascotaId ->
-                            navController.navigate("detail_screen/$mascotaId")
+                            navController.navigate("detail_screen/$mascotaId") // Navegación a la pantalla de detalles de la mascota
                         },
                         onFavoriteClick = { mascotaId ->
-                            onFavoriteChange(mascotaId)
+                            onFavoriteChange(mascotaId) // Acción cuando se marca/desmarca como favorita
                         },
-                        favoriteMascotas = favoriteMascotas.value
+                        favoriteMascotas = favoriteMascotas.value // Lista de mascotas favoritas
                     )
                 }
             }
@@ -129,6 +131,7 @@ fun HomeScreen(navController: NavController, favoriteMascotas: MutableState<List
     )
 }
 
+// Composable para mostrar una tarjeta de mascota
 @Composable
 fun MascotaCard(mascota: Mascota, onClick: () -> Unit, onFavoriteClick: () -> Unit, isFavorite: Boolean, modifier: Modifier = Modifier) {
     val nombre = stringResource(id = mascota.stringResourceId)
@@ -137,7 +140,7 @@ fun MascotaCard(mascota: Mascota, onClick: () -> Unit, onFavoriteClick: () -> Un
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable(onClick = onClick)
+            .clickable(onClick = onClick) // Acción cuando se hace clic en la tarjeta
     ) {
         Column {
             Image(
@@ -164,7 +167,7 @@ fun MascotaCard(mascota: Mascota, onClick: () -> Unit, onFavoriteClick: () -> Un
                     Icon(
                         imageVector = Icons.Default.Favorite,
                         contentDescription = "Añadir a Favoritos",
-                        tint = if (isFavorite) Color.Red else Color.Gray
+                        tint = if (isFavorite) Color.Red else Color.Gray // Cambia el color del ícono según si es favorita o no
                     )
                 }
             }
@@ -172,15 +175,16 @@ fun MascotaCard(mascota: Mascota, onClick: () -> Unit, onFavoriteClick: () -> Un
     }
 }
 
+// Composable para mostrar una lista de mascotas
 @Composable
 fun MascotaList(mascotaList: List<Mascota>, onItemClick: (Int) -> Unit, onFavoriteClick: (Int) -> Unit, favoriteMascotas: List<Int>, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
         items(mascotaList) { mascota ->
             MascotaCard(
                 mascota = mascota,
-                onClick = { onItemClick(mascota.stringResourceId) },
-                onFavoriteClick = { onFavoriteClick(mascota.stringResourceId) },
-                isFavorite = favoriteMascotas.contains(mascota.stringResourceId),
+                onClick = { onItemClick(mascota.stringResourceId) }, // Acción cuando se hace clic en la mascota
+                onFavoriteClick = { onFavoriteClick(mascota.stringResourceId) }, // Acción cuando se marca/desmarca como favorita
+                isFavorite = favoriteMascotas.contains(mascota.stringResourceId), // Verifica si la mascota está en favoritos
                 modifier = Modifier.padding(8.dp)
             )
         }
@@ -190,7 +194,7 @@ fun MascotaList(mascotaList: List<Mascota>, onItemClick: (Int) -> Unit, onFavori
 @Composable
 fun HomeScreenPreview() {
     val navController = rememberNavController()
-    val favoriteMascotas = remember { mutableStateOf(listOf<Int>()) } // Añade la lista de favoritos
+    val favoriteMascotas = remember { mutableStateOf(listOf<Int>()) } // lista de favoritos
 
     MascotasTheme {
         HomeScreen(navController = navController,

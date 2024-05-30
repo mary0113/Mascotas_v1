@@ -46,23 +46,27 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.mascotas.ui.theme.MascotasTheme
 
+//Clase principal que representa la actividad principal de la aplicación
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             MascotasTheme {
-                val navController = rememberNavController()
-                val favoriteMascotas = remember { mutableStateOf(listOf<Int>()) }
+                val navController = rememberNavController() // Controlador de navegación
+                val favoriteMascotas = remember { mutableStateOf(listOf<Int>()) } // Estado mutable para almacenar los favoritos
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    // NavHost que contiene los componibles de la aplicación
                     NavHost(navController = navController, startDestination = "principal_screen") {
+                        // Componible para la pantalla principal
                         composable("principal_screen") {
                             PrincipalScreen(navController)
                         }
+                        // Componible para la pantalla de inicio
                         composable("home") {
                             HomeScreen(
                                 navController = navController,
@@ -76,6 +80,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
+                        // Componible para la pantalla de detalles
                         composable(
                             "detail_screen/{mascotaId}",
                             arguments = listOf(navArgument("mascotaId") { type = NavType.IntType })
@@ -85,6 +90,7 @@ class MainActivity : ComponentActivity() {
                                 DetailScreen(navController = navController, mascotaId = id)
                             }
                         }
+                        // Componible para la pantalla de búsqueda
                         composable("search") {
                             SearchScreen(
                                 navController = navController,
@@ -98,9 +104,11 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
+                        // Componible para la pantalla de favoritos
                         composable("favorites"){
                             FavoritesScreen(navController = navController, favoriteMascotas = favoriteMascotas.value)
                         }
+                        // Componible para la pantalla de información
                         composable("info") {
                             InfoScreen(navController)
                         }
@@ -112,7 +120,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
+//Composable que muestra la pantalla principal de la aplicación
 @Composable
 fun PrincipalScreen(navController: NavController) {
     PrincipalImage(
@@ -125,6 +133,7 @@ fun PrincipalScreen(navController: NavController) {
 }
 
 
+//Composable que muestra texto principal con un título, una frase y un botón
 @Composable
 fun PrincipalText(title: String, phrase: String, modifier: Modifier = Modifier, onButtonClick: () -> Unit){
     Column (
@@ -164,6 +173,7 @@ fun PrincipalText(title: String, phrase: String, modifier: Modifier = Modifier, 
     }
 }
 
+//Composbale para la imagen principal
 @Composable
 fun PrincipalImage(title: String, phrase: String, modifier: Modifier = Modifier, onButtonClick: () -> Unit) {
     val image = painterResource(R.drawable.principalmascota)
@@ -185,6 +195,8 @@ fun PrincipalImage(title: String, phrase: String, modifier: Modifier = Modifier,
     }
 }
 
+
+//Composable que representa la barra de navegación inferior de la aplicación.
 @Composable
 fun MyBottomAppBar(navController: NavController) {
     val context = LocalContext.current.applicationContext

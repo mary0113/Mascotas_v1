@@ -27,17 +27,21 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mascotas.data.Datasource
 
+
+// Composable para mostrar la pantalla de favoritos
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoritesScreen(navController: NavController, favoriteMascotas: List<Int>) {
+    // Carga las mascotas que están marcadas como favoritas
     val mascotas = Datasource().loadMascotas().filter { it.stringResourceId in favoriteMascotas }
 
+    // Diseño de la pantalla usando Scaffold
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Atrás", color = Color.White) },
+                title = { Text(text = "Atrás", color = Color.White) }, // Título de la barra superior
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.popBackStack() }) { // Botón de navegación para volver atrás
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Atrás",
@@ -46,35 +50,37 @@ fun FavoritesScreen(navController: NavController, favoriteMascotas: List<Int>) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF352514)
+                    containerColor = Color(0xFF352514) // Color del fondo de la barra superior
                 )
             )
         },
         bottomBar = {
-            MyBottomAppBar(navController)
+            MyBottomAppBar(navController) // Barra inferior
         },
         content = { innerPadding ->
+            // Contenido principal de la pantalla
             Surface(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding),
-                color = Color(0xFFb4764f)
+                    .padding(innerPadding), // Añade relleno
+                color = Color(0xFFb4764f) // Color de fondo de la pantalla
             ) {
                 Column(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize() // Ocupa todoel espacio disponible
                 ) {
                     Text(
-                        text = "FAVORITOS",
+                        text = "FAVORITOS", // Título de la sección de favoritos
                         style = MaterialTheme.typography.headlineLarge,
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.primary, // Color del texto
                         textAlign = TextAlign.Center,
                         fontSize = 30.sp,
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier.padding(16.dp) // Añade relleno
                     )
+                    // Verifica si no hay mascotas favoritas
                     if (mascotas.isEmpty()) {
                         Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
+                            modifier = Modifier.fillMaxSize(), // Ocupa todoel espacio disponible
+                            contentAlignment = Alignment.Center // Alinea el contenido al centro
                         ) {
                             Text(
                                 text = "No hay mascotas en favoritos",
@@ -84,12 +90,14 @@ fun FavoritesScreen(navController: NavController, favoriteMascotas: List<Int>) {
                             )
                         }
                     } else {
+                        // Muestra la lista de mascotas favoritas
                         LazyColumn(modifier = Modifier.fillMaxSize()) {
                             items(mascotas) { mascota ->
+                                // Composable para mostrar una tarjeta de mascota
                                 MascotaCard(
                                     mascota = mascota,
-                                    onClick = { /* No necesita hacer nada*/ },
-                                    onFavoriteClick = { /* No necesita hacer nada */ },
+                                    onClick = { /* No necesita hacer nada*/ }, // Acción cuando se hace clic
+                                    onFavoriteClick = { /* No necesita hacer nada */ }, // Acción cuando se marca/desmarca como favorita
                                     isFavorite = true, // Todas las mascotas aquí son favoritas
                                     modifier = Modifier.padding(8.dp)
                                 )

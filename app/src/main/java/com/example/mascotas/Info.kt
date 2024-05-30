@@ -30,10 +30,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
+//Composable que muestra la pantalla de información de la aplicación.
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoScreen(navController: NavController) {
     Scaffold(
+        // Barra superior con el botón de navegación
         topBar = {
             TopAppBar(
                 title = { Text(text = "Atrás", color = Color.White) },
@@ -46,13 +48,13 @@ fun InfoScreen(navController: NavController) {
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(  // Color de fondo de la barra superior
                     containerColor = Color(0xFF352514)
                 )
             )
         },
         bottomBar = {
-            MyBottomAppBar(navController)
+            MyBottomAppBar(navController) // Barra inferior
         },
         content = { innerPadding ->
             Box(
@@ -60,6 +62,7 @@ fun InfoScreen(navController: NavController) {
                     .fillMaxSize()
                     .padding(innerPadding)
             ) {
+                // Imagen en pantalla completa
                 Image(
                     painter = painterResource(id = R.drawable.info),
                     contentDescription = null,
@@ -73,6 +76,7 @@ fun InfoScreen(navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
+                    // Título de la aplicación
                     Text(
                         text = "PET-HEALTH",
                         style = MaterialTheme.typography.headlineLarge,
@@ -85,6 +89,7 @@ fun InfoScreen(navController: NavController) {
                             .padding(16.dp)
                             .background(Color.Transparent),
                     ) {
+                        // Texto descriptivo de la aplicación
                         Text(
                             text = "La salud de tus mascotas es primordial, y por eso he creado esta aplicación. " +
                                     "Llevar un registro de sus vacunas, citas médicas, edad, peso, enfermedades, entre otros datos, es muy importante. " +
@@ -105,8 +110,8 @@ fun InfoScreen(navController: NavController) {
                         .background(Color.Transparent),
                 ) {
                     Surface(
-                        color = Color.DarkGray,
-                        shape = CircleShape
+                        color = Color.DarkGray,  // Color de fondo del badge
+                        shape = CircleShape // Forma circular del badge
                     ) {
                         Text(
                             text = "-En memoria de Chesster ♥",
