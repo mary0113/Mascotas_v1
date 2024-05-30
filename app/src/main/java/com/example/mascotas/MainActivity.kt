@@ -53,6 +53,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             MascotasTheme {
                 val navController = rememberNavController()
+                val favoriteMascotas = remember { mutableStateOf(listOf<Int>()) }
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -62,7 +64,17 @@ class MainActivity : ComponentActivity() {
                             PrincipalScreen(navController)
                         }
                         composable("home") {
-                            HomeScreen(navController)
+                            HomeScreen(
+                                navController = navController,
+                                favoriteMascotas = favoriteMascotas,
+                                onFavoriteChange = { mascotaId ->
+                                    if (favoriteMascotas.value.contains(mascotaId)) {
+                                        favoriteMascotas.value = favoriteMascotas.value - mascotaId
+                                    } else {
+                                        favoriteMascotas.value = favoriteMascotas.value + mascotaId
+                                    }
+                                }
+                            )
                         }
                         composable(
                             "detail_screen/{mascotaId}",
@@ -77,7 +89,7 @@ class MainActivity : ComponentActivity() {
                             SearchScreen(navController)
                         }
                         composable("favorites"){
-                            FavoritesScreen(navController)
+                            FavoritesScreen(navController = navController, favoriteMascotas = favoriteMascotas.value)
                         }
                         composable("info") {
                             InfoScreen(navController)
