@@ -1,5 +1,6 @@
 package com.example.mascotas
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -50,7 +51,7 @@ fun FavoritesScreen(navController: NavController, favoriteMascotas: List<Int>) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF352514) // Color del fondo de la barra superior
+                    containerColor = MaterialTheme.colorScheme.primary // Color del fondo de la barra superior
                 )
             )
         },
@@ -63,7 +64,8 @@ fun FavoritesScreen(navController: NavController, favoriteMascotas: List<Int>) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding), // Añade relleno
-                color = Color(0xFFb4764f) // Color de fondo de la pantalla
+                 color = MaterialTheme.colorScheme.onSecondaryContainer
+
             ) {
                 Column(
                     modifier = Modifier.fillMaxSize() // Ocupa todoel espacio disponible

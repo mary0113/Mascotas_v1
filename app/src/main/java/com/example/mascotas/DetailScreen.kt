@@ -96,7 +96,7 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF2a1d10) // Color del fondo de la barra superior
+                    containerColor = MaterialTheme.colorScheme.primary // Color del fondo de la barra superior
                 )
             )
         },
@@ -110,7 +110,7 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(innerPadding)
-                        .background(Color(0xFF795548)) // Color de fondo
+                        .background(MaterialTheme.colorScheme.onPrimaryContainer) // Color de fondo
                         .padding(16.dp)
                 ) {
                     Column {
@@ -168,7 +168,7 @@ fun DetailScreen(navController: NavController, mascotaId: Int) {
                                         .fillMaxWidth()
                                         .padding(horizontal = 16.dp),
                                     elevation = CardDefaults.cardElevation(4.dp),
-                                    colors = CardDefaults.cardColors(containerColor = Color(0xFFd0ab7a)) // Color de fondo del Card
+                                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary) // Color de fondo del Card
                                 ) {
                                     // Información detallada de la mascota
                                     Column(
@@ -240,8 +240,9 @@ fun VacunaCard(@StringRes vacunaId: Int) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+            .padding(8.dp)
+            .background(MaterialTheme.colorScheme.onPrimaryContainer),
+             elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
@@ -285,8 +286,9 @@ fun CitaCard(@StringRes citaId: Int) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+            .padding(8.dp)
+           .background(MaterialTheme.colorScheme.onPrimaryContainer),
+       elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp)

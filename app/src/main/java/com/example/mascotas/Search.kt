@@ -79,7 +79,7 @@ fun SearchScreen(navController: NavController, favoriteMascotas: MutableState<Li
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF352514) // Color del fondo de la barra superior
+                    containerColor = MaterialTheme.colorScheme.primary // Color del fondo de la barra superior
                 )
             )
         },
@@ -195,7 +195,15 @@ fun SearchBar(query: String, onQueryChange: (String) -> Unit, onSearch: () -> Un
             .fillMaxWidth()
             .padding(16.dp)
             .focusRequester(focusRequester), // Aplica el foco al TextField
-        placeholder = { Text(text = "Buscar...") },
+        placeholder = {
+            Text(
+                text = "BUSCAR...",
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    color = Color.Gray, // Color del texto del marcador de posición
+                    fontWeight = FontWeight.Normal
+                )
+            )
+        },
         trailingIcon = {
             // Icono de búsqueda que ejecuta la acción de búsqueda cuando se presiona
             IconButton(onClick = onSearch) {
@@ -203,10 +211,13 @@ fun SearchBar(query: String, onQueryChange: (String) -> Unit, onSearch: () -> Un
             }
         },
         singleLine = true, // Configura el TextField para que sea de una sola línea
+        textStyle = MaterialTheme.typography.bodyMedium.copy(
+            color = Color.DarkGray // Color del texto del TextField
+        ),
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = MaterialTheme.colorScheme.onPrimaryContainer, // Color de fondo del TextField
+            containerColor = MaterialTheme.colorScheme.onSecondaryContainer, // Color de fondo del TextField
             focusedIndicatorColor = MaterialTheme.colorScheme.primary,  // Color del indicador cuando el TextField está enfocado
-            unfocusedIndicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)  // Color del indicador cuando el TextField no está enfocado
+            unfocusedIndicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), // Color del indicador cuando el TextField no está enfocado
         )
     )
 

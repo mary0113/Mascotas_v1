@@ -203,7 +203,7 @@ fun MyBottomAppBar(navController: NavController) {
     val selected = remember { mutableStateOf(Icons.Default.Home) }
 
     BottomAppBar(
-        containerColor = Color.LightGray
+        containerColor = MaterialTheme.colorScheme.secondary
     ) {
         IconButton(
             onClick = {

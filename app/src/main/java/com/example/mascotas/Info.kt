@@ -49,7 +49,7 @@ fun InfoScreen(navController: NavController) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(  // Color de fondo de la barra superior
-                    containerColor = Color(0xFF352514)
+                    containerColor = MaterialTheme.colorScheme.primary
                 )
             )
         },
@@ -88,6 +88,7 @@ fun InfoScreen(navController: NavController) {
                         modifier = Modifier
                             .padding(16.dp)
                             .background(Color.Transparent),
+
                     ) {
                         // Texto descriptivo de la aplicación
                         Text(

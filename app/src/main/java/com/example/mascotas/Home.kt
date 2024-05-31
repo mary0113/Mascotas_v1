@@ -36,6 +36,7 @@ import com.example.mascotas.ui.theme.MascotasTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -70,7 +71,7 @@ fun HomeScreen(navController: NavController, favoriteMascotas: MutableState<List
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF352514) // Color de fondo de la barra superior
+                    containerColor = MaterialTheme.colorScheme.primary// Color de fondo de la barra superior
                 )
             )
         },
@@ -85,17 +86,20 @@ fun HomeScreen(navController: NavController, favoriteMascotas: MutableState<List
                     .padding(innerPadding)
             ) {
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(20.dp)
+                        .fillMaxWidth()
+                        .padding(20.dp),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         text = "PET-HEALTH", // Título de la aplicación
                         color = MaterialTheme.colorScheme.primary,  // Color del texto
                         fontSize = 35.sp,
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
+                        style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
+                        modifier = Modifier.padding(bottom = 16.dp) // Agrega un espacio inferior
                     )
                     Divider(
                         color = Color(0xFF5a4928),
@@ -110,9 +114,9 @@ fun HomeScreen(navController: NavController, favoriteMascotas: MutableState<List
                         color = MaterialTheme.colorScheme.tertiary, // Color del texto
                         fontSize = 25.sp,
                         textAlign = TextAlign.Start,
-                        style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
+                        style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
+                        modifier = Modifier.padding(bottom = 16.dp) // Agrega un espacio inferior
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
 
                     // Aquí se incluye la lista de mascotas
                     MascotaList(
@@ -139,6 +143,7 @@ fun MascotaCard(mascota: Mascota, onClick: () -> Unit, onFavoriteClick: () -> Un
     Card(
         modifier = modifier
             .fillMaxWidth()
+            .wrapContentHeight()
             .padding(8.dp)
             .clickable(onClick = onClick) // Acción cuando se hace clic en la tarjeta
     ) {
