@@ -68,4 +68,8 @@
     <string name="cita3M">13/09/2024\nCita para revisión general</string>
     <string name="cita4M">29/10/2024\nCita para aplicación de vacuna contra Rinotraqueitis</string>
 
+    <string name="informacion">Información</string>
+    <string name="vacuna">Vacunas</string>
+    <string name="cita">Citas Médicas</string>
+
 </resources>

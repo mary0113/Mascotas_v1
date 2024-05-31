@@ -17,3 +17,8 @@ data class Mascota(
 
 )
 
+data class Botones(
+    @StringRes val stringInfo: Int,
+    @StringRes val stringVacuna : Int,
+    @StringRes val stringCita: Int
+)

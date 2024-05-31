@@ -2,6 +2,7 @@ package com.example.mascotas.data
 
 import android.annotation.SuppressLint
 import com.example.mascotas.R
+import com.example.mascotas.model.Botones
 import com.example.mascotas.model.Mascota
 
 //Clase que proporciona los datos de las mascotas.
@@ -26,5 +27,12 @@ class Datasource (){
                 listOf(R.string.vacuna1M, R.string.vacuna2M, R.string.vacuna3M, R.string.vacuna4M),
                 listOf(R.string.cita1M, R.string.cita2M, R.string.cita3M, R.string.cita4M))
         )
+    }
+
+
+    fun loadBotones(): List<Botones>{
+       return listOf<Botones> (
+           Botones(R.string.informacion,R.string.vacuna, R.string.cita)
+       )
     }
 }
