@@ -308,7 +308,7 @@ fun CitaCard(@StringRes citaId: Int) {
 fun MascotaCitas(citaIds: List<Int>) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
-            text = "Citas Médicas",
+            text = "CITAS MÉDICAS",
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.primary,
             fontSize = 35.sp,
